@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SelectBoxs</title>
+</head>
+<style>
+  body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f0f0f0; /* Change background color as needed */
+  }
+
+  h2 {
+      font-size: 30px;
+      position: absolute;
+      top: 15%;
+  }
+
+  .selectbox {
+      width: 300px; /* Adjust width as needed */
+      background-color: #fff; /* Change background color as needed */
+      border-radius: 5px;
+      padding: 20px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+  }
+
+  select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 5px;
+      border: 1px solid #ccc; /* Add border for clarity */
+  }
+</style>
+<body>
+    <h2>SELECT BOX </h2>
+    <div class="selectbox">
+    <label for="countrySelect">Select Country:</label>
+  <select id="countrySelect" onchange="populateStates()">
+    <option value="">Select Country</option>
+    <option value="pakistan">Pakistan</option>
+    <option value="Canada">Canada</option>
+    <option value="UK">England</option>
+    <option value="Australia">Australia</option>
+    <option value="India">India</option>
+  </select>
+  
+  <label for="stateSelect">Select State:</label>
+  <select id="stateSelect" onchange="populateCities()">
+    <option value="">Select State</option>
+  </select>
+  
+  <label for="citySelect">Select City:</label>
+  <select id="citySelect">
+    <option value="">Select City</option>
+  </select>
+  
+  <script>
+    const data = {
+      "pakistan": {
+        "Punjab": ["Lahore", "Bahawalpur", "faislabad"],
+        "Sindh": ["Karachi", "Hyderabad", "karachi"],
+        "Balochistan": ["Peshawar", "Chilas", "besham"],
+        "KPK": ["Dera Ismail Khan", "Lakki Marwat", "Kohat","Karak"],
+
+      },
+      "Canada": {
+        "Ontario": ["Toronto", "Ottawa", "Hamilton"],
+        "Quebec": ["Montreal", "Quebec City"],
+        "Texas": ["Houston", "Dallas", "Austin"],
+      },
+      "Australia": {
+        "Sydney": ["Toronto", "Ottawa", "Hamilton"],
+        "Melbourne": ["Montreal", "Quebec City"],
+        "Texas": ["Houston", "Dallas", "Austin"],
+
+      },
+      "India": {
+        "New Delhi": ["Ahmadabad", "amritsar", "punjab"],
+        "Mumbai": ["Haripur", "Rampur"],
+        "UP": ["Mumbai", "Delhi", "sindh"],
+      },
+    };
+    function populateStates() {
+      const country = document.getElementById("countrySelect").value;
+      const stateSelect = document.getElementById("stateSelect");
+      if (country && data[country]) {
+        Object.keys(data[country]).forEach(state => {
+          const option = document.createElement("option");
+          option.value = state;
+          option.text = state;
+          stateSelect.appendChild(option);
+        });
+      }
+    }
+    function populateCities() {
+      const country = document.getElementById("countrySelect").value;
+      const state = document.getElementById("stateSelect").value;
+      const citySelect = document.getElementById("citySelect");
+      if (country && state && data[country] && data[country][state]) {
+        data[country][state].forEach(city => {
+          const option = document.createElement("option");
+          option.value = city;
+          option.text = city;
+          citySelect.appendChild(option);
+        });
+      }
+    }  
+</script>
+</div>
+</body>
+</html>
